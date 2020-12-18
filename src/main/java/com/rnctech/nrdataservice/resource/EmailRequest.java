@@ -1,33 +1,22 @@
 package com.rnctech.nrdataservice.resource;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 /**
  * Email Object
- * @contributor zilin
- * 2020.09
+ * 
+ * @contributor zilin 2020.09
  */
 
 public class EmailRequest {
-    @Email
-    @NotEmpty
-    private String email;
+	
+	private String email;
+	private String subject;
+	private String body;
+	private LocalDateTime dateTime = LocalDateTime.now();
 
-    @NotEmpty
-    private String subject;
-
-    @NotEmpty
-    private String body;
-
-    @NotNull
-    private LocalDateTime dateTime = LocalDateTime.now();
-
-    @NotNull
-    private ZoneId timeZone = ZoneId.of("UTC"); // ZoneId.systemDefault(); 
+	private ZoneId timeZone = ZoneId.of("UTC"); // ZoneId.systemDefault();
 
 	public String getEmail() {
 		return email;

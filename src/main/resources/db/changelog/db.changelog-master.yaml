@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: zilin
+      dbms: mysql
+      changes: 
+        - sqlFile:
+            encoding: utf8
+            path: db/changelog/sql/tables_mysql.sql
+            splitStatements: true
+            stripComments: true
+
+  - changeSet:
+      id: 2
+      author: zilin
+      dbms: mysql
+      changes: 
+        - sqlFile:
+            encoding: utf8
+            path: db/changelog/sql/rn_mysql.sql
+            splitStatements: true
+            stripComments: true            

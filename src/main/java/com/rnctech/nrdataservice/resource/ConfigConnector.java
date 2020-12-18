@@ -28,9 +28,9 @@ public class ConfigConnector extends RestResConnector {
 	public void init() {
 		super.init();
 		if(connction.baseUrl.startsWith("https")){
-			cclient = new ConfigClient(connction.baseUrl, connction.key, connction.secret, -1l);
+			cclient = new ConfigClient(connction.baseUrl, connction.key, connction.secret);
 		}
-		cclient = new ConfigClient(connction.baseUrl,  connction.key, connction.secret, -1l);
+		cclient = new ConfigClient(connction.baseUrl,  connction.key, connction.secret);
 	}
 	
 	

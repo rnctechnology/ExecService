@@ -3,7 +3,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/rnjob?createDatabaseIfNotExist=true&useSSL=false
     username: root
-    password: Welcome123!
+    password: 12345678
   servlet:
     multipart:
       enabled: true
@@ -82,8 +82,8 @@ rnctech:
 file:
   upload-dir: /tmp/uploads
   backups3: true
-  key: AKIAI33PDL2J7CIQRFCA
-  scret: 03A06/4pmc/GW65AURONeCST7DgotNWY8OtafARf
+  key: A111111111111111111A
+  scret: 02222222222222222222222222222222220
   region: us-west-2  
-  bucketname: com.rnctech.nrt
+  bucketname: com.rnctech.test
   basefolder: exec

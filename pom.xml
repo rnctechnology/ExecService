@@ -169,12 +169,6 @@
 			<groupId>com.rnctech</groupId>
 			<artifactId>rncutils</artifactId>
 			<version>1.0</version>
-			<!-- exclusions>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions-->
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -311,22 +305,6 @@
     		<artifactId>mariadb-java-client</artifactId>
     		<version>2.4.0</version>
 		</dependency>
-<!-- 		<dependency>
-	      <groupId>io.grpc</groupId>
-	      <artifactId>grpc-netty</artifactId>
-	      <version>${grpc.version}</version>
-	    </dependency>
-	    <dependency>
-	      <groupId>io.grpc</groupId>
-	      <artifactId>grpc-protobuf</artifactId>
-	      <version>${grpc.version}</version>
-	    </dependency>
-	    <dependency>
-	      <groupId>io.grpc</groupId>
-	      <artifactId>grpc-stub</artifactId>
-	      <version>${grpc.version}</version>
-	    </dependency> -->
-<!-- https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java -->
 		<dependency>
 		    <groupId>com.google.protobuf</groupId>
 		    <artifactId>protobuf-java</artifactId>
@@ -539,6 +517,5 @@
 			</build>
 		</profile>
 	</profiles>
-
 </project>
 

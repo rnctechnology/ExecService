@@ -445,7 +445,7 @@ public class PythonExecutor extends RNJobExecutor implements ExecuteResultHandle
 				jobdetailrepo = (JobDetailsRepository)lookupBean("jobDetailsRepository", JobDetailsRepository.class);
 			}
 			
-			JobDetails jdl = jobdetailrepo.findByTenantAndJobid(tenant, id);			
+			JobDetails jdl = jobdetailrepo.findByNameAndJobid(tenant, id);			
 			Job job = jobrepo.findById(id).get();
 			
 			if(job.getJobid() != jobid || !job.getTenant().equalsIgnoreCase(tenant)) {
@@ -594,7 +594,7 @@ public class PythonExecutor extends RNJobExecutor implements ExecuteResultHandle
 			Long id = Long.parseLong(ctx.getCtxid());
 			Job job = jobrepo.findById(id).get();
 			sb.append(job.getTenant()+" with jobid "+job.getJobid()+" run at "+job.getJobExecutedBy());
-			JobDetails jdl = jobdetailrepo.findByTenantAndJobid(tenant, id);
+			JobDetails jdl = jobdetailrepo.findByNameAndJobid(tenant, id);
 			if(null != jdl) {	
 				sb.append(" with process id as "+jdl.getStatementid()+" ");
 				sb.append(" with params as "+jdl.getParams()+" ");				

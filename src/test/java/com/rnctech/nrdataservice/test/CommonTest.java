@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @2020.09
  */
 
-public class CommonTest extends JobServiceTest {
+public class CommonTest extends ExecBaseTest {
 
 	@Autowired
 	private DataSource dataSource;

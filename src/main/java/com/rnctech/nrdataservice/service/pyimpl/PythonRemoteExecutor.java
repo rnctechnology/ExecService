@@ -343,7 +343,7 @@ public class PythonRemoteExecutor extends RNJobExecutor {
 				jobdetailrepo = (JobDetailsRepository)lookupBean("jobDetailsRepository", JobDetailsRepository.class);
 			}
 			
-			JobDetails jdl = jobdetailrepo.findByTenantAndJobid(tenant, id);			
+			JobDetails jdl = jobdetailrepo.findByNameAndJobid(tenant, id);			
 			Job job = jobrepo.findById(id).get();
 			
 			if(job.getJobid() != jobid || !job.getTenant().equalsIgnoreCase(tenant)) {
@@ -396,7 +396,7 @@ public class PythonRemoteExecutor extends RNJobExecutor {
 			Long id = Long.parseLong(ctx.getCtxid());
 			Job job = jobrepo.findById(id).get();
 			sb.append(job.getTenant()+" cancal job "+job.getJobid()+" run at "+job.getJobExecutedBy());
-			JobDetails jdl = jobdetailrepo.findByTenantAndJobid(tenant, id);
+			JobDetails jdl = jobdetailrepo.findByNameAndJobid(tenant, id);
 			if(null != jdl) {	
 				try {
 					sb.append(" with statement id as "+jdl.getStatementid()+" ");
@@ -434,7 +434,7 @@ public class PythonRemoteExecutor extends RNJobExecutor {
 			Job job = jobrepo.findById(id).get();
 			sb.append(job.getTenant()+" with jobid "+job.getJobid()+" run at "+job.getJobExecutedBy());
 			
-			JobDetails jdl = jobdetailrepo.findByTenantAndJobid(tenant, id);
+			JobDetails jdl = jobdetailrepo.findByNameAndJobid(tenant, id);
 			if(null != jdl) {	
 				String statusurl = this.pyEngineUrl+"jobs/status/"+jdl.getStatementid();
 				String ss = callRestAPI(restTemplate, customHeaders, statusurl, "POST", null);

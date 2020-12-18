@@ -214,7 +214,7 @@ public abstract class BaseLivyExecutor extends RNJobExecutor {
 			Long id = Long.parseLong(ctx.getCtxid());
 			Job job = jobrepo.findById(id).get();
 			sb.append(job.getTenant()+" cancal job "+job.getJobid()+" run at "+job.getJobExecutedBy());
-			JobDetails jdl = jobdetailrepo.findByTenantAndJobid(tenant, id);
+			JobDetails jdl = jobdetailrepo.findByNameAndJobid(tenant, id);
 			if(null != jdl) {	
 				try {
 					sb.append(" with statement id as "+jdl.getStatementid()+" ");
@@ -520,7 +520,7 @@ public abstract class BaseLivyExecutor extends RNJobExecutor {
 			Long id = Long.parseLong(ctx.getCtxid());
 			Job job = jobrepo.findById(id).get();
 			sb.append(job.getTenant()+" with jobid "+job.getJobid()+" run at "+job.getJobExecutedBy());
-			JobDetails jdl = jobdetailrepo.findByTenantAndJobid(tenant, id);
+			JobDetails jdl = jobdetailrepo.findByNameAndJobid(tenant, id);
 			if(null != jdl) {	
 				sb.append(" with statement id as "+jdl.getStatementid()+" ");
 				sb.append(" with params as "+jdl.getParams()+" ");				
@@ -576,7 +576,7 @@ public abstract class BaseLivyExecutor extends RNJobExecutor {
 				jobdetailrepo = (JobDetailsRepository)lookupBean("jobDetailsRepository", JobDetailsRepository.class);
 			}
 			
-			JobDetails jdl = jobdetailrepo.findByTenantAndJobid(tenant, id);			
+			JobDetails jdl = jobdetailrepo.findByNameAndJobid(tenant, id);			
 			Job job = jobrepo.findById(id).get();
 			
 			if(job.getJobid() != jobid || !job.getTenant().equalsIgnoreCase(tenant)) {

@@ -12,7 +12,7 @@ import com.rnctech.nrdataservice.exception.RNBaseException;
 import com.rnctech.nrdataservice.service.RNResult;
 import com.rnctech.nrdataservice.service.RNResult.ResultMessage;
 import com.rnctech.nrdataservice.service.javaimpl.JavaExecutor;
-import com.rnctech.nrdataservice.test.JobServiceTest;
+import com.rnctech.nrdataservice.test.ExecBaseTest;
 import com.rnctech.nrdataservice.utils.RNUtilities;
 import com.rnctech.nrdataservice.utils.RNCOutputStream;
 
@@ -29,7 +29,7 @@ import java.util.Properties;
  */
 
 @Ignore
-public class BaseJvmTest extends JobServiceTest {
+public class BaseJvmTest extends ExecBaseTest {
 
   @Autowired
   protected JavaExecutor jvmexecutor;

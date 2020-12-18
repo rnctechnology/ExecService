@@ -366,7 +366,7 @@ public class JOBService implements RNConsts {
 		List<Job> jobs = jobrepo.findByRunningJobid(tenantName, jobId);
 		if(null != jobs && !jobs.isEmpty()) {
 			Job j = jobs.get(0);
-			JobDetails jd = jdrepo.findByTenantAndJobid(tenantName, j.getId());
+			JobDetails jd = jdrepo.findByNameAndJobid(tenantName, j.getId());
 			if(null != jd) {
 				Status sts = Status.values()[jd.getStatus()];
 				return !sts.isCompleted();

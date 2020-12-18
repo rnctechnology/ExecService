@@ -73,7 +73,7 @@ public class StatusService implements RNConsts {
 				res.setRetType(Type.TEXT);
 				return res;
 			}
-			JobDetails jdl = jdrepo.findByTenantAndJobid(tenant, pid);
+			JobDetails jdl = jdrepo.findByNameAndJobid(tenant, pid);
 			JobDataMap jdp = null;
 			if(null != job && null != jdl) {
 				String jobkeyname = job.getJobkey();
@@ -120,7 +120,7 @@ public class StatusService implements RNConsts {
 			JobKey runningjob = jkeys.stream().filter(jk -> jk.getName().equals(jobkeyname)).findAny().get();
 			JobDataMap jdp = null;
 			if (null != runningjob) {
-				JobDetails jdl = jdrepo.findByTenantAndJobid(tenant, pid);
+				JobDetails jdl = jdrepo.findByNameAndJobid(tenant, pid);
 				JobDetail jobDetail = scheduler.getJobDetail(runningjob);
 				jdp = jobDetail.getJobDataMap();
 				if (null == jdp)

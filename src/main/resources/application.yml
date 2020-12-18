@@ -1,0 +1,89 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/rnjob?createDatabaseIfNotExist=true&useSSL=false
+    username: root
+    password: Welcome123!
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 1KB
+      max-file-size: 500MB
+      max-request-size: 512MB  
+  mail:
+    protocol: smtp
+    host: smtp.office365.com
+    port: 587
+    username: rnctech-user-admin@rnctech.com
+    password: ENC(H3DCaBCuqmTr71mNB/UeI9igxgkoqZDK)
+    sendto: alan.chen@rnctech.com
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  jpa:
+    hibernate:
+      show_sql: true
+      ddl-auto: none
+
+server:
+  port: 8082
+  servlet:
+    context-path: /exec
+
+management:
+  security:
+    enabled: true
+  endpoints:
+    health:
+      show-details: always
+    web:
+      base-path: /manage
+      exposure:
+        include: env,info,health,metrics,heapdump
+
+security:
+  basic:
+    enabled: true
+  user:
+    name: rncadmin
+    password: ENC(Mrvz+6LxCvScTfh2FYpBW3hctYBew4pi)
+
+logging:
+  level:
+    root: INFO
+    com.rnctech.nrdataservice: DEBUG
+    org.hibernate: INFO
+
+python:
+  maxResult: 20	
+
+liquibase:
+  change-log=classpath:db/changelog/db.changelog-master.xml
+
+quartz:
+  enabled: true
+    
+rnctech:
+  profile: QA
+  exec:
+    gatewayserver_address: localhost
+    sourceType: python
+    exec:
+      type: service
+    schedule:
+      type: async
+    cron:
+      jobtrigger: 300000
+      jobexpression: 0/9 * * * * ?     
+
+file:
+  upload-dir: /tmp/uploads
+  backups3: true
+  key: AKIAI33PDL2J7CIQRFCA
+  scret: 03A06/4pmc/GW65AURONeCST7DgotNWY8OtafARf
+  region: us-west-2  
+  bucketname: com.rnctech.nrt
+  basefolder: exec

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
+	debug="true">
+
+	<appender name="consoleAppender" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{ISO8601} | %p | %X{tenant} | %c{40} | %t | %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="rnLogFileAppender" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="/var/log/platform/rn-logs.log" />
+		<param name="MaxFileSize" value="10MB" />
+		<param name="MaxBackupIndex" value="10" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{ISO8601} | %p | %X{tenant} | %X{jobid} |%c{40} | %t | %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="rnhibernateLogFileAppender" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="/var/log/platform/rn-hibernate-logs.log" />
+		<param name="MaxFileSize" value="10MB" />
+		<param name="MaxBackupIndex" value="10" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{ISO8601} | %p | %c{40} | %t | %m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="rnspringLogFileAppender" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="/var/log/platform/rn-spring-logs.log" />
+		<param name="MaxFileSize" value="10MB" />
+		<param name="MaxBackupIndex" value="10" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{ISO8601} | %p | %c{40} | %t | %m%n" />
+		</layout>
+	</appender>
+	
+	<logger name="org.spring.security">
+		<level value="INFO" />
+		<appender-ref ref="rnspringLogFileAppender" />
+	</logger>
+	
+	<logger name="org.hibernate">
+		<level value="INFO" />
+		<appender-ref ref="rnhibernateLogFileAppender" />
+	</logger>
+
+	<logger name="com.rnctech">
+		<level value="INFO" />
+		<appender-ref ref="rnLogFileAppender" />
+	</logger>
+
+	<root>
+		<level value="INFO" />
+		<appender-ref ref="consoleAppender" />
+	</root>
+
+</log4j:configuration>

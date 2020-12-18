@@ -1,0 +1,65 @@
+server:
+  port: 8082
+  contextPath: /exec
+
+
+logging:
+  level:
+    root: INFO
+    com.rnctech.nrdataservice: INFO
+    org.hibernate: DEBUG
+
+security:
+  basic:
+    enabled: false
+  user:
+    name: rncadmin
+    password: ENC(Mrvz+6LxCvScTfh2FYpBW3hctYBew4pi)
+
+spring:
+  datasource:
+    driver-class-name: org.hsqldb.jdbcDriver
+    url: jdbc:hsqldb:mem:rnjob
+    username: sa
+    password: 
+  mail:
+    protocol: smtp
+    host: smtp.office365.com
+    port: 587
+    username: rnctech-user-admin@rnctech.com
+    password: Rn@te@h!
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true       
+ 
+python:
+  maxResult: 20	
+
+rnctech:
+  profile: QA
+  exec:
+    gatewayserver_address: localhost
+    sourceType: python
+    exec:
+      type: service
+    schedule:
+      type: async
+    cron:
+      jobtrigger: 300000
+      jobexpression: 0/9 * * * * ? 
+      
+quartz:
+  enabled: false
+  
+aws:
+  credentials:
+    accessKey: xxxx
+    secretKey: yyyy
+  region: us-west-2  
+  bucketName: com.rnctech.nrt
+  basefolder: exec
+  
+  

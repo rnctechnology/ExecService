@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.rnctech.nrdataservice.proto";
+option java_outer_classname = "ExecProto";
+option objc_class_prefix = "Exec";
+
+package rn;
+
+// The Rnctech job service definition.
+service Exec {
+  // Sends code
+  rpc execute (ExecuteRequest) returns (stream ExecuteResponse) {}
+
+  // Get completion
+  rpc complete (CompletionRequest) returns (CompletionResponse) {}
+
+  // Cancel the running statement
+  rpc cancel (CancelRequest) returns (CancelResponse) {}
+
+  // Get ipython kernel status
+  rpc status (StatusRequest) returns (StatusResponse) {}
+
+  rpc stop(StopRequest) returns (StopResponse) {}
+}
+
+enum ExecuteStatus {
+  SUCCESS = 0;
+  ERROR = 1;
+}
+
+enum IPythonStatus {
+  STARTING = 0;
+  RUNNING = 1;
+}
+
+enum OutputType {
+  TEXT = 0;
+  IMAGE = 1;
+}
+
+// The request message containing the code
+message ExecuteRequest {
+  string code = 1;
+}
+
+// The response message containing the execution result.
+message ExecuteResponse {
+  ExecuteStatus status = 1;
+  OutputType type = 2;
+  string output = 3;
+}
+
+message CancelRequest {
+
+}
+
+message CancelResponse {
+
+}
+
+message CompletionRequest {
+  string code = 1;
+  int32 cursor = 2;
+}
+
+message CompletionResponse {
+  repeated string matches = 1;
+}
+
+message StatusRequest {
+
+}
+
+message StatusResponse {
+  IPythonStatus status = 1;
+}
+
+message StopRequest {
+
+}
+
+message StopResponse {
+
+}

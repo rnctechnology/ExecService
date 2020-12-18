@@ -10,7 +10,7 @@
 	</appender>
 
 	<appender name="rnLogFileAppender" class="org.apache.log4j.RollingFileAppender">
-		<param name="File" value="/var/log/platform/rn-logs.log" />
+		<param name="File" value="/var/log/rn-logs.log" />
 		<param name="MaxFileSize" value="10MB" />
 		<param name="MaxBackupIndex" value="10" />
 		<layout class="org.apache.log4j.PatternLayout">
@@ -19,7 +19,7 @@
 	</appender>
 
 	<appender name="rnhibernateLogFileAppender" class="org.apache.log4j.RollingFileAppender">
-		<param name="File" value="/var/log/platform/rn-hibernate-logs.log" />
+		<param name="File" value="/var/log/rn-hibernate-logs.log" />
 		<param name="MaxFileSize" value="10MB" />
 		<param name="MaxBackupIndex" value="10" />
 		<layout class="org.apache.log4j.PatternLayout">
@@ -28,7 +28,7 @@
 	</appender>
 	
 	<appender name="rnspringLogFileAppender" class="org.apache.log4j.RollingFileAppender">
-		<param name="File" value="/var/log/platform/rn-spring-logs.log" />
+		<param name="File" value="/var/log/rn-spring-logs.log" />
 		<param name="MaxFileSize" value="10MB" />
 		<param name="MaxBackupIndex" value="10" />
 		<layout class="org.apache.log4j.PatternLayout">

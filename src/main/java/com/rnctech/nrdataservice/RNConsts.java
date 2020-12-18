@@ -11,12 +11,12 @@ import java.util.concurrent.TimeUnit;
 
 public interface RNConsts {
 
-	public final static String MR_URL = "rnctech.login.url";
-	public final static String MR_USER = "rnctech.login.user";
+	public final static String CONFIGURL = "rnctech.login.url";
+	public final static String CONFIGUSER = "rnctech.login.user";
 
 	public final static String RUN_ID = "rnctech.runId";
 	public final static String TXN_ID = "rnctech.transactionId";
-	public static final String PASSWORD_SALT = "password.salt";
+	public static final String PWDSALT = "password.salt";
 
 	public final static String javahome = "JAVA_HOME";
 	public final static String sparkhome = "SPARK_HOME";
@@ -68,7 +68,7 @@ public interface RNConsts {
 	}
 	
 	public static enum JOBTYPE {
-		VALIDATE, SCRIPT, CLASS, AAJOB
+		VALIDATE, SCRIPT, CLASS, ANALYSIS
 	}
 
 	public static enum TechType {
@@ -76,7 +76,7 @@ public interface RNConsts {
 	}
 	
 	public static enum Algorithm {
-		DecisionTree, RandomForest, GradientBoostedTree 
+		DecisionTree, RandomForest, GradientBoostedTree, Classification 
 	}
 	
 	public static enum AlgorithmType {

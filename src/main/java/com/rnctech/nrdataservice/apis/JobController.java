@@ -74,7 +74,7 @@ public class JobController {
 			jobdata.getJobConfiguration().setName(tenantName);
 		
 		String jobtype = jobdata.getJobConfiguration().getJobType();
-		if(jobtype.equalsIgnoreCase("SCRIPT") || jobtype.equalsIgnoreCase("CLASS") ||jobtype.equalsIgnoreCase("AAJOB") ) {
+		if(jobtype.equalsIgnoreCase("SCRIPT") || jobtype.equalsIgnoreCase("CLASS") ||jobtype.equalsIgnoreCase("ANALYSIS") ) {
 			String codesnap =  jobdata.getJobConfiguration().getCodeSnap();
 			if(null == codesnap || codesnap.isEmpty()) {
 				return asBadReguest(jobdata, "No script or uri found for job type "+jobtype, HttpStatus.BAD_REQUEST);

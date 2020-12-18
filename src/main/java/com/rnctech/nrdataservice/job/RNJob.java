@@ -74,26 +74,22 @@ public abstract class RNJob implements InterruptableJob {
 	public static final String SPARK_URL ="sparkURL"; 
 	public static final String EXECUTABLE ="executable"; 
 	public static final String INSTNACE_TYPE = "customerInstanceType";
-	public static final String MRVERSION = "com.rnctech.mr.mdac.version";
+	public static final String MRVERSION = "com.rnctech.version";
 	public static final String ENVNAME = "envName";
 	public static final String JOB_NAME = "jobname";
 	public static final String MODE_NAME = "model.name";
 	public static final String SRC_NAME = "ssrcName";
-	public static final String SQL_PROPERTY_PARAM_BEGIN_STRING = "SQL_PROPERTY_PARAM_BEGIN_STRING";
-	public static final String SQL_PROPERTY_PARAM_END_STRING = "SQL_PROPERTY_PARAM_END_STRING";
-	public static final String ETL_RUN_NUMBER = "MR_ETL_RUN_NUMBER";
-	public static final String PARENT_RUN_ID = "PARENT_ETL_RUN_ID";
+	public static final String ETL_RUN_NUMBER = "ETL_RUN_NUMBER";
+	public static final String PARENT_RUN_ID = "PARENT_RUN_ID";
 	public static final String LDB_CLIENT_SOURC_Database = "LDB_CLIENT_SOURC_Database";
 	public static final String LDB_CLIENT_MYSQL_Database = "LDB_CLIENT_MYSQL_Database";
 	public static final String LDB_CLIENT_MYSQL_STG_Database = "LDB_CLIENT_MYSQL_STG_Database";
 	public static final String ETL_RUN_ID = "etl_runid";
-	public static final String TENANT_MAILTO = "tenant.email_to";
-	protected String DEFAULT_BPS = "@#";
-	protected String DEFAULT_EPS = "@#";
+	public static final String TENANT_MAILTO = "config.email_to";
     public static final String DEFAULT_DOWNLOAD_PATH = "/file/download/";
     public static final String YARN_URL = "sparkapp.yarn.url";
     public static final String HIST_URL = "sparkapp.historyserver.url";
-    protected String ssalt = "PASSWORD_S_A_L_T";
+    protected String ssalt = "PASSW@RD_S@!T";
     protected static String STD_ERR = "stderr: ";
     protected static String STD_YARN = "YARN Diagnostics:";
     protected static String STD_USG = "usage: ";
@@ -151,17 +147,13 @@ public abstract class RNJob implements InterruptableJob {
 
 			try {
 				tps.putAll(ConfigClient.getNameConfigs(job));
-				ssalt = ConfigClient.getConfig(RNConsts.PASSWORD_SALT,job, "");
+				ssalt = ConfigClient.getConfig(RNConsts.PWDSALT,job, "");
 			} catch (Exception e) {
 				logger.error(jobContext.getJobDetail().getJobDataMap().getString("name")+e.getMessage());
 			}
 			if(tps.isEmpty()) {
 				logger.warn("failed to get MR properties!! "+job.toString());
 			}
-			
-			
-			if(!tps.containsKey(SQL_PROPERTY_PARAM_BEGIN_STRING)) tps.put(SQL_PROPERTY_PARAM_BEGIN_STRING, DEFAULT_BPS);
-			if(!tps.containsKey(SQL_PROPERTY_PARAM_END_STRING)) tps.put(SQL_PROPERTY_PARAM_END_STRING, DEFAULT_EPS);
 
 			while (!stopFlag.get()) {
 				RNContext ctx = setupContext(jobContext, tps);
@@ -658,15 +650,14 @@ public abstract class RNJob implements InterruptableJob {
 		if(null == props || props.isEmpty()) {
 			return codesnap;
 		}
-		String beginParamString = props.get(SQL_PROPERTY_PARAM_BEGIN_STRING);
-		String endParamString = props.get(SQL_PROPERTY_PARAM_END_STRING); 
-		Pattern p = Pattern.compile(beginParamString + "(.+?)" + endParamString);
+ 
+		Pattern p = Pattern.compile("(.+?)");
 
 		String x = new String(codesnap);		
 		Matcher m = p.matcher(x);
 		while(m.find()) {
 			String g = m.group();
-			String gg = g.substring(beginParamString.length(), g.length() - endParamString.length());
+			String gg = g.substring(0, g.length());
 			if(null != jobprop && jobprop.containsKey(gg)) { //passing param has higher priority
 				String replacement = jobprop.getProperty(gg); 
 				x = x.replaceAll(g, replacement);
@@ -688,7 +679,7 @@ public abstract class RNJob implements InterruptableJob {
 	}
 
 	private void setSharedLivyProperties(Properties prop) throws RNBaseException {
-		String deflivyurl = "http://10.0.0.234:8998";
+		String deflivyurl = "http://10.0.0.8:8998";
 		if (null != prop.getProperty(SPARK_URL)) {
 			int lindex = prop.getProperty(SPARK_URL).lastIndexOf(":");
 			deflivyurl = prop.getProperty(SPARK_URL).substring(0, lindex)+":8998";
@@ -766,7 +757,7 @@ public abstract class RNJob implements InterruptableJob {
 			updateJob(job, jsd, status);
 			if(null != job && (executor instanceof BaseLivyExecutor)) {
 				BaseLivyExecutor livyexector =(BaseLivyExecutor)executor;
-				JobDetails jdl = jobdetailrepo.findByTenantAndJobid(datamap.getString("name"), jobpid);
+				JobDetails jdl = jobdetailrepo.findByNameAndJobid(datamap.getString("name"), jobpid);
 				if(null != jdl) {				
 					if(-1 != livyexector.getSessionid())jdl.setSessionid(livyexector.getSessionid());
 					if(null != livyexector.getSessionInfo() && null != livyexector.getSessionInfo().appId) jdl.setAppid(livyexector.getSessionInfo().appId);
@@ -776,7 +767,7 @@ public abstract class RNJob implements InterruptableJob {
 					jobdetailrepo.flush();
 				}
 			}else if(null != job && (executor instanceof PythonExecutor)) {
-				JobDetails jdl = jobdetailrepo.findByTenantAndJobid(datamap.getString("name"), jobpid);
+				JobDetails jdl = jobdetailrepo.findByNameAndJobid(datamap.getString("name"), jobpid);
 				if(null != jdl) {
 					jdl.setStatus(status);
 					jdl.setLastModified(new Date());

@@ -49,7 +49,7 @@ public class RNUtilities implements RNConsts {
 	}
 	
 	public static boolean isMRJob(String jobType) {
-		return jobType.equalsIgnoreCase("SCRIPT") || jobType.equalsIgnoreCase("CLASS") || jobType.equalsIgnoreCase("AAJOB");
+		return jobType.equalsIgnoreCase("SCRIPT") || jobType.equalsIgnoreCase("CLASS") || jobType.equalsIgnoreCase("ANALYSIS");
 	}
 	
  	public static String toString(Object o) throws IOException{

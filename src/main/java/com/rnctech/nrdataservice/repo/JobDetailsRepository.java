@@ -15,7 +15,7 @@ import org.springframework.data.jpa.repository.Query;
 public interface JobDetailsRepository extends JpaRepository<JobDetails,  Long> {
 
 	  @Query("SELECT jd FROM JobDetails jd WHERE LOWER(jd.tenant) = LOWER(:tenant) AND jd.job.id = :jobid")
-	  public JobDetails findByTenantAndJobid(@Param("tenant") String tenant, @Param("jobid") Long jobid);
+	  public JobDetails findByNameAndJobid(@Param("tenant") String tenant, @Param("jobid") Long jobid);
 	  
 	  public List<JobDetails> findByJobname(String jobname);
 	  

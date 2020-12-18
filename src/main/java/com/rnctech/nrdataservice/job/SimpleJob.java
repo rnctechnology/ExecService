@@ -82,9 +82,6 @@ public class SimpleJob extends RNJob {
 				}
 				jdl.setCodeSnap(sc);
 				jdl.setTenant(datamap.getString("name"));
-					/*if(null == job.getJobdetails())
-						job.setJobdetails(new HashSet<JobDetails>());
-					job.getJobdetails().add(jdl);*/
 				jdl.setJob(job);
 				jobdetailrepo.save(jdl);
 				job.setStatus(Status.RUNNING.ordinal());    		

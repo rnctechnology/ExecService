@@ -495,7 +495,7 @@ public class PythonRemoteExecutor extends RNJobExecutor {
 		JobConfig jobConfiguration = new JobConfig();
 		jobConfiguration.setLoadType(LOADTYPE.SMALL.name());
 		jobConfiguration.setScriptType("PYTHON");
-		jobConfiguration.setJobType(JOBTYPE.AAJOB.name());
+		jobConfiguration.setJobType(JOBTYPE.ANALYSIS.name());
 		jobConfiguration.setCodeSnap(st);
 		jobConfiguration.setName(tenant);
 		if(null == st || st.isEmpty()) { //cancel, status 
